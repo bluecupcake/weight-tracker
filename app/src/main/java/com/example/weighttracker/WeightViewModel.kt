@@ -21,6 +21,10 @@ class WeightViewModel(
         repository.updateWeightItem(weightItem)
     }
 
+    fun deleteWeightItem(weightItem: WeightItem) = viewModelScope.launch {
+        repository.deleteWeightItem(weightItem)
+    }
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

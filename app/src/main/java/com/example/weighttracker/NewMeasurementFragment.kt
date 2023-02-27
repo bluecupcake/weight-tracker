@@ -22,6 +22,7 @@ class NewMeasurementFragment(var weightItem: WeightItem?) : BottomSheetDialogFra
 
         if (weightItem != null) {
             binding.title.text = "Pomiar z dnia " + weightItem!!.dateString
+
             val editable = Editable.Factory.getInstance()
             with(binding) {
                 weight.text = editable.newEditable(weightItem!!.weight.toString())
@@ -32,8 +33,16 @@ class NewMeasurementFragment(var weightItem: WeightItem?) : BottomSheetDialogFra
                 thigh.text = editable.newEditable(weightItem!!.thigh.toString())
                 arm.text = editable.newEditable(weightItem!!.arm.toString())
             }
+
+            with (binding.delete) {
+                visibility  = View.VISIBLE
+                setOnClickListener {
+                    deleteAction()
+                }
+            }
         } else {
             binding.title.text = "Nowy pomiar"
+            binding.delete.visibility  = View.GONE
         }
 
         weightViewModel = ViewModelProvider(activity).get(WeightViewModel::class.java)
@@ -71,6 +80,7 @@ class NewMeasurementFragment(var weightItem: WeightItem?) : BottomSheetDialogFra
                 thigh,
                 arm
             )
+
             weightViewModel.addWeightItem(newWeight)
         } else {
             weightItem!!.dateString = date
@@ -81,7 +91,21 @@ class NewMeasurementFragment(var weightItem: WeightItem?) : BottomSheetDialogFra
             weightItem!!.hips = hips
             weightItem!!.thigh = thigh
             weightItem!!.arm = arm
+
+            weightViewModel.updateWeightItem(weightItem!!)
         }
+
+        clear()
+        dismiss()
+    }
+
+    private fun deleteAction() {
+        weightViewModel.deleteWeightItem(weightItem!!)
+        clear()
+        dismiss()
+    }
+
+    private fun clear() {
         binding.weight.setText("")
         binding.weist.setText("")
         binding.chest.setText("")
@@ -89,7 +113,5 @@ class NewMeasurementFragment(var weightItem: WeightItem?) : BottomSheetDialogFra
         binding.hips.setText("")
         binding.thigh.setText("")
         binding.arm.setText("")
-
-        dismiss()
     }
 }

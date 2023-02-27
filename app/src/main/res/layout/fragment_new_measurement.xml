@@ -35,15 +35,30 @@ tools:context=".NewMeasurementFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/teal_200"
+        android:text="Usuń"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:text="Obwód lewego bicepsa:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/save"
+        app:layout_constraintBottom_toTopOf="@+id/delete"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText

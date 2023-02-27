@@ -17,4 +17,9 @@ class WeightItemRepository(
     suspend fun updateWeightItem(weightItem: WeightItem) {
         weightItemDao.updateWeightItem(weightItem)
     }
+
+    @WorkerThread
+    suspend fun deleteWeightItem(weightItem: WeightItem) {
+        weightItemDao.deleteWeightItem(weightItem)
+    }
 }
